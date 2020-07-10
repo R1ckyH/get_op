@@ -5,4 +5,4 @@ A plugin for [MCDReforged](https://github.com/Fallen-Breath/MCDReforged) which c
 
 Type `!!op` to get op
 
-Could be used in mirror and creative server
+Could be used in `mirror` and `creative` server
