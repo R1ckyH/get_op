@@ -1,35 +1,47 @@
-# coding: utf8
-import copy
+# -*- coding: utf-8 -*-
+from mcdreforged.api.types import *
+from mcdreforged.api.command import *
+
+PLUGIN_METADATA = {
+    'id': 'get_op',
+    'version': '1.2.1',
+    'name': 'get_op',
+    'description': 'A plugin that can get op permission easily',
+    'author': 'ricky',
+    'link': 'https://github.com/rickyhoho/get_op',
+    'dependencies': {
+        'mcdreforged': '>=1.0.0'
+    }
+}
 
 
 plugin = 'get_op'
 prefix = '!!op'
 systemreturn = '''§b[§rget_op§b] §r'''
 last_player = 'test'
-server_listen = 0
+server_listen = False
 
 
-def onServerInfo(server, info):
+def give_op(src : CommandSource):
+    global server_listen, last_player
+    last_player = src.get_info().player
+    src.get_server().execute("op " + last_player)
+    server_listen = True
+
+
+def on_info(server : ServerInterface, info: Info):
     global server_listen
-    global last_player
-    if server_listen == 1:
-        server_listen = 0
+    if not info.is_player and server_listen:
+        server_listen = False
         if info.content.startswith('Made'):
             server.tell(last_player, systemreturn + "You are op now!")
         elif info.content.startswith("Nothing"):
             server.tell(last_player, systemreturn + "You are already oped")
-    elif info.isPlayer == 1:
-        if info.content.startswith('!!op'):
-            server_listen = 1
-            last_player = info.player
-            server.execute('op ' + info.player)
 
 
 def on_load(server, old):
-    server.add_help_message('!!op','A plugin that get op easily')
-    
-    
-def on_info(server, info):
-    info2 = copy.deepcopy(info)
-    info2.isPlayer = info2.is_player
-    onServerInfo(server, info2) 
+    server.register_help_message('!!op','A plugin that can get op easily')
+    server.register_command(
+        Literal(prefix).
+        runs(give_op)
+    )
