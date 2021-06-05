@@ -1,6 +1,18 @@
-# coding: utf8
-import copy
-import time
+# -*- coding: utf-8 -*-
+from mcdreforged.api.types import *
+from mcdreforged.api.command import *
+
+PLUGIN_METADATA = {
+    'id': 'get_op',
+    'version': '1.2.1',
+    'name': 'get_op',
+    'description': 'A plugin that can get op permission easily',
+    'author': 'ricky',
+    'link': 'https://github.com/rickyhoho/get_op',
+    'dependencies': {
+        'mcdreforged': '>=1.0.0'
+    }
+}
 
 
 plugin = 'get_op'
@@ -28,7 +40,7 @@ def op_sur(server, player):
 
 
 
-def onServerInfo(server, info):
+def on_info(server, info):
     global server_listen
     if info.isPlayer == 1:
         if info.content.startswith('!!op'):
@@ -39,10 +51,4 @@ def onServerInfo(server, info):
 
 
 def on_load(server, old):
-    server.add_help_message('!!op','轻松可以拿到op的插件')
-    
-    
-def on_info(server, info):
-    info2 = copy.deepcopy(info)
-    info2.isPlayer = info2.is_player
-    onServerInfo(server, info2) 
+    server.register_help_message('!!op','轻松可以拿到op的插件')
