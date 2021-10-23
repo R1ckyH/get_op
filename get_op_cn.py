@@ -8,7 +8,7 @@ PLUGIN_METADATA = {
     'name': 'get_op_cn',
     'description': '一个可以轻松拿到op的插件',
     'author': 'ricky',
-    'link': 'https://github.com/rickyhoho/get_op',
+    'link': 'https://github.com/R1ckyH/get_op',
     'dependencies': {
         'mcdreforged': '>=1.0.0'
     }

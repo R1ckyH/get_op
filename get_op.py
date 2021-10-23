@@ -8,7 +8,7 @@ PLUGIN_METADATA = {
     'name': 'get_op',
     'description': 'A plugin that can get op permission easily',
     'author': 'ricky',
-    'link': 'https://github.com/rickyhoho/get_op',
+    'link': 'https://github.com/R1ckyH/get_op',
     'dependencies': {
         'mcdreforged': '>=1.0.0'
     }
